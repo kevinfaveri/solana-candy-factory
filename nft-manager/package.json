@@ -1,0 +1,42 @@
+{
+  "name": "nft-manager",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A Strapi application",
+  "scripts": {
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi",
+    "dev": "strapi dev",
+    "update-creator-all-rows": "node ./scripts/update-creator-all-rows",
+    "generate-nfts-sources": "node ./scripts/generate-nfts-sources"
+  },
+  "devDependencies": {
+    "pg": "^8.7.1",
+    "strapi-sdk-javascript": "^0.3.3"
+  },
+  "dependencies": {
+    "knex": "0.21.18",
+    "strapi": "3.6.8",
+    "strapi-admin": "3.6.8",
+    "strapi-connector-bookshelf": "3.6.8",
+    "strapi-plugin-content-manager": "3.6.8",
+    "strapi-plugin-content-type-builder": "3.6.8",
+    "strapi-plugin-email": "3.6.8",
+    "strapi-plugin-i18n": "3.6.8",
+    "strapi-plugin-upload": "3.6.8",
+    "strapi-plugin-users-permissions": "3.6.8",
+    "strapi-utils": "3.6.8"
+  },
+  "author": {
+    "name": "A Strapi developer"
+  },
+  "strapi": {
+    "uuid": "6be5f5ac-6262-4573-b274-c7988e3110ef"
+  },
+  "engines": {
+    "node": ">=10.16.0 <=16.x.x",
+    "npm": "^6.0.0"
+  },
+  "license": "MIT"
+}

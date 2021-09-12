@@ -1,0 +1,98 @@
+diff --git a/node_modules/@solana/wallet-adapter-react-ui/lib/WalletModalProvider.d.ts b/node_modules/@solana/wallet-adapter-react-ui/lib/WalletModalProvider.d.ts
+index 201a75a..807f022 100644
+--- a/node_modules/@solana/wallet-adapter-react-ui/lib/WalletModalProvider.d.ts
++++ b/node_modules/@solana/wallet-adapter-react-ui/lib/WalletModalProvider.d.ts
+@@ -1,4 +1,3 @@
+ import { FC } from 'react';
+-import './styles.css';
+ import { WalletModalProps } from './WalletModal';
+ export declare const WalletModalProvider: FC<WalletModalProps>;
+diff --git a/node_modules/@solana/wallet-adapter-react-ui/lib/WalletModalProvider.js b/node_modules/@solana/wallet-adapter-react-ui/lib/WalletModalProvider.js
+index 60ad829..51ffbd5 100644
+--- a/node_modules/@solana/wallet-adapter-react-ui/lib/WalletModalProvider.js
++++ b/node_modules/@solana/wallet-adapter-react-ui/lib/WalletModalProvider.js
+@@ -1,49 +1,50 @@
+ "use strict";
+-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+-    if (k2 === undefined) k2 = k;
+-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+-}) : (function(o, m, k, k2) {
+-    if (k2 === undefined) k2 = k;
+-    o[k2] = m[k];
++var __createBinding = (this && this.__createBinding) || (Object.create ? (function (o, m, k, k2) {
++  if (k2 === undefined) k2 = k;
++  Object.defineProperty(o, k2, { enumerable: true, get: function () { return m[k]; } });
++}) : (function (o, m, k, k2) {
++  if (k2 === undefined) k2 = k;
++  o[k2] = m[k];
+ }));
+-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+-    Object.defineProperty(o, "default", { enumerable: true, value: v });
+-}) : function(o, v) {
+-    o["default"] = v;
++var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function (o, v) {
++  Object.defineProperty(o, "default", { enumerable: true, value: v });
++}) : function (o, v) {
++  o["default"] = v;
+ });
+ var __importStar = (this && this.__importStar) || function (mod) {
+-    if (mod && mod.__esModule) return mod;
+-    var result = {};
+-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+-    __setModuleDefault(result, mod);
+-    return result;
++  if (mod && mod.__esModule) return mod;
++  var result = {};
++  if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
++  __setModuleDefault(result, mod);
++  return result;
+ };
+ var __rest = (this && this.__rest) || function (s, e) {
+-    var t = {};
+-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+-        t[p] = s[p];
+-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+-                t[p[i]] = s[p[i]];
+-        }
+-    return t;
++  var t = {};
++  for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
++    t[p] = s[p];
++  if (s != null && typeof Object.getOwnPropertySymbols === "function")
++    for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
++      if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
++        t[p[i]] = s[p[i]];
++    }
++  return t;
+ };
+ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.WalletModalProvider = void 0;
+ const react_1 = __importStar(require("react"));
+-require("./styles.css");
+ const useWalletModal_1 = require("./useWalletModal");
+ const WalletModal_1 = require("./WalletModal");
+ const WalletModalProvider = (_a) => {
+-    var { children } = _a, props = __rest(_a, ["children"]);
+-    const [visible, setVisible] = (0, react_1.useState)(false);
+-    return (react_1.default.createElement(useWalletModal_1.WalletModalContext.Provider, { value: {
+-            visible,
+-            setVisible,
+-        } },
+-        children,
+-        visible && react_1.default.createElement(WalletModal_1.WalletModal, Object.assign({}, props))));
++  var { children } = _a, props = __rest(_a, ["children"]);
++  const [visible, setVisible] = (0, react_1.useState)(false);
++  return (react_1.default.createElement(useWalletModal_1.WalletModalContext.Provider, {
++    value: {
++      visible,
++      setVisible,
++    }
++  },
++    children,
++    visible && react_1.default.createElement(WalletModal_1.WalletModal, Object.assign({}, props))));
+ };
+ exports.WalletModalProvider = WalletModalProvider;
+ //# sourceMappingURL=WalletModalProvider.js.map
+\ No newline at end of file

@@ -1,0 +1,111 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nf_ts",
+  "info": {
+    "name": "NFTs",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "symbol": {
+      "type": "string",
+      "required": true,
+      "default": "AIWC"
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "seller_fee_basis_points": {
+      "type": "integer",
+      "min": 0,
+      "max": 10000,
+      "default": 500,
+      "required": true
+    },
+    "image": {
+      "type": "string",
+      "default": "image.png",
+      "required": true
+    },
+    "animation_url": {
+      "type": "string",
+      "default": "video.mp4",
+      "required": true
+    },
+    "external_url": {
+      "type": "string",
+      "default": "https://worldcities.aiphotos.art/details/",
+      "required": true
+    },
+    "traits": {
+      "type": "json",
+      "required": true,
+      "default": {
+        "attributes": [
+          {
+            "trait_type": "COUNTRY",
+            "value": "United States of America"
+          },
+          {
+            "trait_type": "FOUNDATION",
+            "value": "1790"
+          },
+          {
+            "trait_type": "NAMED FOR",
+            "value": "George Washington"
+         },
+         {
+            "trait_type": "POP",
+            "value": "680K+"
+          }
+        ]
+      }
+    },
+    "collection_id": {
+      "model": "collection",
+      "via": "nf_ts",
+      "required": true
+    },
+    "properties": {
+      "type": "json",
+      "required": true,
+      "default": {
+        "files": [
+          {
+            "uri": "image.png",
+            "type": "image/png"
+          }
+        ],
+        "category": "image",
+        "creators": [
+          {
+            "address": "7K6XCSwVh3YZAh7GhARZ9pQ7gWkFNuWQ77U5CbV3PcF3",
+            "share": 100
+          }
+        ]
+      }
+    },
+    "content": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "files",
+        "images",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": true,
+      "pluginOptions": {}
+    }
+  }
+}

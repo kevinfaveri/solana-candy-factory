@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "collections",
+  "info": {
+    "name": "Collection"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "family": {
+      "type": "string",
+      "required": true
+    },
+    "nf_ts": {
+      "via": "collection_id",
+      "collection": "nf-ts"
+    }
+  }
+}

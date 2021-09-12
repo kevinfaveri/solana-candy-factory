@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/nf-ts",
+      "handler": "nf-ts.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/nf-ts/count",
+      "handler": "nf-ts.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/nf-ts/:id",
+      "handler": "nf-ts.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/nf-ts",
+      "handler": "nf-ts.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/nf-ts/:id",
+      "handler": "nf-ts.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/nf-ts/:id",
+      "handler": "nf-ts.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

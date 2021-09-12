@@ -1,0 +1,14 @@
+version: '3'
+volumes:
+  pg_strapi_candyfactory:
+services:
+  postgres:
+    image: postgres
+    ports:
+      - "6432:5432"
+    environment:
+      POSTGRES_DB: strapi
+      POSTGRES_USER: strapi
+      POSTGRES_PASSWORD: strapi
+    volumes:
+      - "pg_strapi_candyfactory:/var/lib/postgresql/data"
