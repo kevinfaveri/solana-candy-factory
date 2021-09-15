@@ -34,7 +34,8 @@ async function generateNftsSources() {
   const files = fs.readdirSync('../nfts-sources')
   for (let index = 0; index < files.length; index++) {
     const file = files[index];
-    fs.unlinkSync(`../nfts-sources/${file}`)
+    if (!file.includes('.gitkeep'))
+      fs.unlinkSync(`../nfts-sources/${file}`)
   }
 
   const strapi = new Strapi('http://localhost:1337');
@@ -61,7 +62,7 @@ async function generateNftsSources() {
       },
       properties: nft.properties
     }
-    fs.cpSync(`./public${nft.content.url}`, `../nfts-sources/${index}.png`)
+    fs.copyFileSync(`./public${nft.content.url}`, `../nfts-sources/${index}.png`)
     fs.writeFileSync(`../nfts-sources/${index}.json`, JSON.stringify(jsonFile))
   }
 }
