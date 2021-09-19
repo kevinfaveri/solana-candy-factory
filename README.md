@@ -123,3 +123,7 @@ If this helped you on shipping your first NFT candy factory, feel free to drop a
 - Ethereum Network: 0x0aa037390619Ecb58974A983131986210cd03dF5
 
 Also, if possible, follow me on https://twitter.com/kevinfaveri_ and https://twitter.com/aiphotos_ (which is the art project that inspired this repository) :)
+
+## Hire
+
+If you want to hire me to develop your candy machine application on the Solana or Ethereum blockchain feel free to reach me through the email kevin@faveri.dev
