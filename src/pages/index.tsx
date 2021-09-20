@@ -18,7 +18,7 @@ const Home = () => {
   const [isActive, setIsActive] = useState(false); // true when countdown completes
   const wallet = useWallet();
 
-  const { isSoldOut, mintStartDate, isMinting, onMint } = useCandyMachine()
+  const { isSoldOut, mintStartDate, isMinting, onMint, nftsData } = useCandyMachine()
 
   return (
     <main className="p-5">
@@ -34,7 +34,10 @@ const Home = () => {
       }
 
       {wallet.connected &&
-        <p>Balance: {(balance || 0).toLocaleString()} SOL</p>
+        <>
+          <p>Balance: {(balance || 0).toLocaleString()} SOL</p>
+          <p>Available/Minted/Total: {nftsData.itemsRemaining}/{nftsData.itemsRedeemed}/{nftsData.itemsAvailable}</p>
+        </>
       }
 
       <div>
@@ -60,7 +63,7 @@ const Home = () => {
 
       <div className="flex float-right space-x-5">
         <WalletMultiButton />
-        <WalletDisconnectButton /> 
+        <WalletDisconnectButton />
       </div>
     </main>
   );

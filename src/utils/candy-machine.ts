@@ -5,7 +5,9 @@ import {
   TOKEN_PROGRAM_ID,
   Token,
 } from "@solana/spl-token";
-import { LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { Metadata } from '../libs/metaplex/index.esm';
+import axios from "axios";
+
 export const CANDY_MACHINE_PROGRAM = new anchor.web3.PublicKey(
   "cndyAnrLdpjq1Ssp1z8xxDsB8dxe7u4HL5Nxi2K5WXZ"
 );
@@ -117,11 +119,11 @@ export const awaitTransactionSignatureConfirmation = async (
     connection.removeSignatureListener(subId);
   }
   done = true;
-  console.log("Returning status", status);
+  console.log("Returning status ", status);
   return status;
 }
 
-/* export */ const createAssociatedTokenAccountInstruction = (
+const createAssociatedTokenAccountInstruction = (
   associatedTokenAddress: anchor.web3.PublicKey,
   payer: anchor.web3.PublicKey,
   walletAddress: anchor.web3.PublicKey,
@@ -231,6 +233,35 @@ const getTokenWallet = async (
   )[0];
 };
 
+export async function getNftsForOwner(connection: anchor.web3.Connection, ownerAddress: anchor.web3.PublicKey) {
+  const allTokens = []
+  const tokenAccounts = await connection.getParsedTokenAccountsByOwner(ownerAddress, {
+    programId: TOKEN_PROGRAM_ID
+  });
+
+  for (let index = 0; index < tokenAccounts.value.length; index++) {
+    const tokenAccount = tokenAccounts.value[index];
+    const tokenAmount = tokenAccount.account.data.parsed.info.tokenAmount;
+
+    if (tokenAmount.amount == "1" && tokenAmount.decimals == "0") {
+
+      let [pda] = await anchor.web3.PublicKey.findProgramAddress([
+        Buffer.from("metadata"),
+        TOKEN_METADATA_PROGRAM_ID.toBuffer(),
+        (new anchor.web3.PublicKey(tokenAccount.account.data.parsed.info.mint)).toBuffer(),
+      ], TOKEN_METADATA_PROGRAM_ID);
+      const accountInfo = await connection.getParsedAccountInfo(pda);
+
+      const metadata: any = new Metadata(ownerAddress.toString(), accountInfo.value);
+
+      const { data } = await axios.get(metadata.data.data.uri)
+      allTokens.push(data)
+    }
+  }
+
+  return allTokens
+}
+
 export const mintOneToken = async (
   candyMachine: CandyMachine,
   config: anchor.web3.PublicKey,
@@ -242,7 +273,6 @@ export const mintOneToken = async (
   const { connection, program } = candyMachine;
   const metadata = await getMetadata(mint.publicKey);
   const masterEdition = await getMasterEdition(mint.publicKey);
-
   const rent = await connection.getMinimumBalanceForRentExemption(
     MintLayout.span
   );

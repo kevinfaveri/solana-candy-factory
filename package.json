@@ -34,6 +34,7 @@
     "@solana/wallet-adapter-react-ui": "^0.2.0",
     "@solana/wallet-adapter-wallets": "^0.8.0",
     "@solana/web3.js": "^1.26.0",
+    "axios": "^0.21.4",
     "next": "11.1.2",
     "patch-package": "^6.4.7",
     "postinstall-postinstall": "^2.1.0",

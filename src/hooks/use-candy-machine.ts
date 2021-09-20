@@ -27,8 +27,13 @@ export default function useCandyMachine() {
   const [, setBalance] = useWalletBalance()
   const [candyMachine, setCandyMachine] = useState<CandyMachine>();
   const wallet = useWallet();
-  const [isMinting, setIsMinting] = useState(false); // true when user got to press MINT
-  const [isSoldOut, setIsSoldOut] = useState(false); // true when items remaining is zero
+  const [nftsData, setNftsData] = useState<any>({} = {
+    itemsRemaining: 0,
+    itemsRedeemed: 0,
+    itemsAvailable: 0
+  } as any);
+  const [isMinting, setIsMinting] = useState(false);
+  const [isSoldOut, setIsSoldOut] = useState(false);
   const [mintStartDate, setMintStartDate] = useState(new Date(parseInt(process.env.NEXT_PUBLIC_CANDY_START_DATE!, 10)));
 
   useEffect(() => {
@@ -61,6 +66,27 @@ export default function useCandyMachine() {
     })();
   }, [wallet, candyMachineId, connection]);
 
+  useEffect(() => {
+    (async () => {
+      if (!isMinting) {
+        const anchorWallet = {
+          publicKey: wallet.publicKey,
+          signAllTransactions: wallet.signAllTransactions,
+          signTransaction: wallet.signTransaction,
+        } as anchor.Wallet;
+
+        const { itemsRemaining, itemsRedeemed, itemsAvailable } =
+          await getCandyMachineState(
+            anchorWallet,
+            candyMachineId,
+            connection
+          );
+
+        setNftsData({ itemsRemaining, itemsRedeemed, itemsAvailable });
+      }
+    })();
+  }, [wallet, candyMachineId, connection, isMinting]);
+
   const onMint = async () => {
     try {
       setIsMinting(true);
@@ -81,7 +107,7 @@ export default function useCandyMachine() {
         );
 
         if (!status?.err) {
-          toast.success("Congratulations! Mint succeeded!")
+          toast.success("Congratulations! Mint succeeded! Check on your wallet :)")
         } else {
           toast.error("Mint failed! Please try again!")
         }
@@ -114,5 +140,5 @@ export default function useCandyMachine() {
   };
 
 
-  return { isSoldOut, mintStartDate, isMinting, onMint }
+  return { isSoldOut, mintStartDate, isMinting, nftsData, onMint }
 }
