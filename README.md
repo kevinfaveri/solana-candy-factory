@@ -23,46 +23,6 @@ Techwise, it builds on top of NextJS and TailwindCSS for the frontend (as well a
 * Follow the instructions [here](https://hackmd.io/@levicook/HJcDneEWF) to install the Metaplex Command Line Utility.
   * Installing the Command Line Package is currently an advanced task that will be simplified eventually.
 
-#### Environment Variables
-
-To run the project, first create a `.env` file at the root directory and define the following variables:
-
-```
-NEXT_PUBLIC_CANDY_MACHINE_CONFIG="redacted"
-```
-
-This is a Solana account address. You can get the value for this from the `.cache/temp` file. This file is created when you run the `metaplex upload` command in terminal.
-
-```
-NEXT_PUBLIC_CANDY_MACHINE_ID="redacted"
-```
-
-Same as above; this is a Solana account address. You can get the value for this from the `candy-machine-log.txt` log file. This file is created when you run the `metaplex create_candy_machine` command in terminal.
-
-```
-NEXT_PUBLIC_CANDY_START_DATE=1630422000000
-```
-This is a unix time stamp that configures when your mint will be open. Use the same one used in the `setup-metaplex-env.sh` script. You can get the value for this from the `candy-machine-start-date.txt` log file (don't forget to add three zeros at the end of this value).
-
-
-```
-NEXT_PUBLIC_SOLANA_NETWORK=devnet
-```
-
-This identifies the Solana network you want to connect to. Options are `devnet` and `mainnet-beta`.
-
-```
-NEXT_PUBLIC_SOLANA_RPC_HOST=https://explorer-api.devnet.solana.com
-```
-
-This identifies the RPC server your web app will access the Solana network through.
-
-```
-NEXT_PUBLIC_TREASURY_ADDRESS="redacted"
-```
-
-This the Solana address that receives the funds gathered during the minting process.
-
 ## NFT Manager
 
 *! NOTE*: Be sure to an instance of postgresql running on port 6432. For ease of use, one is provided using docker + docker-compose by running `yarn start-nft-manager-db`
