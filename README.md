@@ -12,6 +12,10 @@ It builds on top of the the work started at https://github.com/exiled-apes/candy
 
 Techwise, it builds on top of NextJS and TailwindCSS for the frontend (as well as Solana Labs toolchain and Serum Anchor libs for interacting with the Solana network); and Metaplex and Solana clis for deployment on the Solana network. It also adds Strapi as the `nft-manager` which is in reality used just as a UI for managing the JSON and PNG files. More details below.
 
+## Step-by-step tutorial
+
+Check out this awesome guide by @nheingit which uses this repo and teaches how to ship your own Candy Machine: https://www.quicknode.com/guides/web3-sdks/how-to-mint-an-nft-on-solana-using-candy-machine
+
 ## Getting Set Up
 
 ### Prerequisites
