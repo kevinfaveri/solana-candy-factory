@@ -5,4 +5,4 @@ solana-keygen new --outfile ~/.config/solana/candyfactory-devnet.json --force > 
 echo "[INFO] Setting config to be the new wallet"
 solana config set -k ~/.config/solana/candyfactory-devnet.json
 echo "[INFO] Sending airdrop"
-solana airdrop 10
+solana airdrop 1
