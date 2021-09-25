@@ -82,9 +82,7 @@ After the deployment is over, it will generate all envs that your frontend dApp 
 
 ## Donate
 
-If this helped you on shipping your first NFT candy factory, feel free to drop a donation on: 
-- Solana Network: Ggm8Pmwx2HSv3LMTT7mGSSGKU14d4WnTnnXozmx9m46a
-- Ethereum Network: 0x0aa037390619Ecb58974A983131986210cd03dF5
+The best way to support me is by minting one city at the project that started it all: https://worldcities.aiphotos.art/
 
 Also, if possible, follow me on https://twitter.com/kevinfaveri_ and https://twitter.com/aiphotos_ (which is the art project that inspired this repository) :)
 
