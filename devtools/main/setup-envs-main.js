@@ -46,7 +46,7 @@ fs.readdir('./logs/main/', (err, files) => {
     NEXT_PUBLIC_TREASURY_ADDRESS,
     NEXT_PUBLIC_CANDY_MACHINE_CONFIG,
     NEXT_PUBLIC_SOLANA_NETWORK: 'mainnet-beta',
-    NEXT_PUBLIC_SOLANA_RPC_HOST: 'https://api.mainnet-beta.solana.com'
+    NEXT_PUBLIC_SOLANA_RPC_HOST: 'https://solana-api.projectserum.com'
 
   }
   fs.writeFileSync('./.env.local.production', envfile.stringify(generatedConfig))
