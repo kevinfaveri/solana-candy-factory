@@ -33,10 +33,10 @@ async function setupMetaplexDev() {
   const fileContent = file.toString()
   const splittedContent = fileContent.split('\n')
   const mintPrice = await getMintPrice()
-  splittedContent[5] = `metaplex create_candy_machine --env mainnet-beta --keypair ~/.config/solana/candyfactory-mainnet.json --price ${mintPrice || 1} > ./logs/main/candy-machine-log.txt`
+  splittedContent[5] = `ts-node ~/metaplex-foundation/metaplex/js/packages/cli/src/candy-machine-cli.ts create_candy_machine --env mainnet-beta --keypair ~/.config/solana/candyfactory-mainnet.json --price ${mintPrice || 1} > ./logs/main/candy-machine-log.txt`
 
   const startDate = await getStartDate()
-  splittedContent[7] = `metaplex update_candy_machine -d "${startDate || '25 Sep 2021 00:00:00'}" --env mainnet-beta --keypair ~/.config/solana/candyfactory-mainnet.json > ./logs/main/candy-machine-start-date.txt`
+  splittedContent[7] = `ts-node ~/metaplex-foundation/metaplex/js/packages/cli/src/candy-machine-cli.ts update_candy_machine -d "${startDate || '25 Sep 2021 00:00:00'}" --env mainnet-beta --keypair ~/.config/solana/candyfactory-mainnet.json > ./logs/main/candy-machine-start-date.txt`
 
   fs.unlinkSync('./devtools/main/setup-metaplex-main.sh')
   fs.writeFileSync('./devtools/main/setup-metaplex-main.sh', splittedContent.join(`\n`))
