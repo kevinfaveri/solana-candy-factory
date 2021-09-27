@@ -6,6 +6,9 @@ import toast from 'react-hot-toast';
 import useWalletBalance from "./use-wallet-balance";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { sleep } from "../utils/utility";
+
+const MINT_PRICE_SOL = 1
+
 const treasury = new anchor.web3.PublicKey(
   process.env.NEXT_PUBLIC_TREASURY_ADDRESS!
 );
@@ -143,7 +146,8 @@ export default function useCandyMachine() {
     try {
       setIsMinting(true);
       if (wallet.connected && candyMachine?.program && wallet.publicKey) {
-        const oldBalance = await connection.getBalance(wallet?.publicKey);
+        const oldBalance = await connection.getBalance(wallet?.publicKey) / LAMPORTS_PER_SOL;
+        const futureBalance = oldBalance - (MINT_PRICE_SOL * quantity)
 
         const signedTransactions: any = await mintMultipleToken(
           candyMachine,
@@ -154,6 +158,7 @@ export default function useCandyMachine() {
         );
 
         const promiseArray = []
+        
 
         for (let index = 0; index < signedTransactions.length; index++) {
           const tx = signedTransactions[index];
@@ -179,11 +184,11 @@ export default function useCandyMachine() {
           }
         }
 
-        let newBalance = await connection.getBalance(wallet?.publicKey);
+        let newBalance = await connection.getBalance(wallet?.publicKey) / LAMPORTS_PER_SOL;
 
-        while(oldBalance === newBalance) {
+        while(newBalance > futureBalance) {
           await sleep(1000)
-          newBalance = await connection.getBalance(wallet?.publicKey);
+          newBalance = await connection.getBalance(wallet?.publicKey) / LAMPORTS_PER_SOL;
         }
 
         if(totalSuccess) {
