@@ -84,7 +84,7 @@ After the deployment is over, it will generate all envs that your frontend dApp 
 
 The best way to support me is by minting one city at the project that started it all: https://worldcities.aiphotos.art/
 
-Also, if possible, follow me on https://twitter.com/kevinfaveri_ and https://twitter.com/aiphotos_ (which is the art project that inspired this repository) :)
+Also, if possible, follow me on [https://twitter.com/kevinfaveri_](https://twitter.com/kevinfaveri_) and [https://twitter.com/aiphotos_](https://twitter.com/aiphotos_) (which is the art project that inspired this repository) :)
 
 ## Hire
 
