@@ -18,7 +18,7 @@ const Home = () => {
   const [isActive, setIsActive] = useState(false); // true when countdown completes
   const wallet = useWallet();
 
-  const { isSoldOut, mintStartDate, isMinting, onMint, nftsData } = useCandyMachine()
+  const { isSoldOut, mintStartDate, isMinting, onMint, onMintMultiple, nftsData } = useCandyMachine()
 
   return (
     <main className="p-5">
@@ -40,7 +40,7 @@ const Home = () => {
         </>
       }
 
-      <div>
+      <div className="flex flex-col justify-start items-start">
         {wallet.connected &&
           <button type="button"
             disabled={isSoldOut || isMinting || !isActive}
@@ -50,6 +50,25 @@ const Home = () => {
               "SOLD OUT"
             ) : isActive ?
               <span>MINT {isMinting && 'LOADING...'}</span> :
+              <Countdown
+                date={mintStartDate}
+                onMount={({ completed }) => completed && setIsActive(true)}
+                onComplete={() => setIsActive(true)}
+                renderer={renderCounter}
+              />
+            }
+          </button>
+        }
+
+        {wallet.connected &&
+          <button type="button"
+            disabled={isSoldOut || isMinting || !isActive}
+            onClick={() => onMintMultiple(5)}
+          >
+            {isSoldOut ? (
+              "SOLD OUT"
+            ) : isActive ?
+              <span>MINT 5 {isMinting && 'LOADING...'}</span> :
               <Countdown
                 date={mintStartDate}
                 onMount={({ completed }) => completed && setIsActive(true)}
