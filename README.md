@@ -35,7 +35,8 @@ This repo features an NFT manager so you do not need to create all nfts by editi
 - A collection
 - An NFT that links to that collection
 
-*! NOTE*: Be sure to create an user, after you login with the admin account, that has the role "authenticated", username "admin" and pass "Admin123", as well as add all collections and upload related permissions to the "authenticated" role; otherwise, the `yarn update-creator-all-rows` and `yarn generate-nft-sources` commands will not work.
+*! NOTE*: Be sure to create an user, after you login with the admin account, that has the role "authenticated", username "admin" and pass "Admin123", as well as add all collections and upload related permissions to the "authenticated" role. After the user is created, open http://localhost:1337/admin/settings/users-permissions/roles/
+select all NFTS permissions as well as Upload permissions for the `Authenticated` role; otherwise, the `yarn update-creator-all-rows` and `yarn generate-nft-sources` commands will not work.
 
 Then you are good to go: run `yarn generate-nft-sources` for generating the JSON and PNG files in the `nfts-sources` folder in the root of the project. Following that, you can go for deployment on production (section below) OR test it in dev using `yarn setup-dev`.
 
