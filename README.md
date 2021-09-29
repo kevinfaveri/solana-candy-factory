@@ -1,5 +1,8 @@
 # NFT Candy Factory
 
+##### I'm brainstorming a few ideas at [IDEAS](./IDEAS.MD) and [PROGRAM IDEAS](./PROGRAM_IDEAS.MD) if you want to collaborate.
+
+
 NOTE: This repo will prob only work on unix-based environments.
 
 The NFT Candy Factory project is designed to let users fork, customize, and deploy their own candy machine mint app to a custom domain, ultra fast.
