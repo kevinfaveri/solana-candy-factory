@@ -9,5 +9,3 @@ solana config set -k ~/.config/solana/candyfactory-mainnet.json
 solana address > ./logs/main/wallet-log.txt
 echo "[INFO] Getting Wallet Balance"
 solana balance
-echo "[INFO] Please check that you have enough SOLs on this wallet to continue"
-read -p "Press enter to continue"
