@@ -1,7 +1,7 @@
-echo "[INFO] Cleaning older cache folder for metaplex"
-rm -rf ./.cache/mainnet-beta-temp
+# echo "[INFO] Cleaning older cache folder for metaplex"
+# rm -rf ./.cache/mainnet-beta-temp
 echo "[INFO] Uploading all resources"
-ts-node ~/metaplex-foundation/metaplex/js/packages/cli/src/candy-machine-cli.ts upload ./nfts-sources --env mainnet-beta --keypair ~/.config/solana/candyfactory-mainnet.json > ./logs/main/upload-log.txt
+ts-node ~/metaplex-foundation/metaplex/js/packages/cli/src/candy-machine-cli.ts upload ./nfts-sources --env mainnet-beta --keypair ~/.config/solana/candyfactory-mainnet.json
 echo "[INFO] Creating candy machine"
 ts-node ~/metaplex-foundation/metaplex/js/packages/cli/src/candy-machine-cli.ts create_candy_machine --env mainnet-beta --keypair ~/.config/solana/candyfactory-mainnet.json --price 1 > ./logs/main/candy-machine-log.txt
 echo "[INFO] Setting minting start date (goLiveDate)"
