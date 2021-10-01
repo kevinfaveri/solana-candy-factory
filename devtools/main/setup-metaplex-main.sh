@@ -1,5 +1,5 @@
 echo "[INFO] Cleaning older cache folder for metaplex"
-rm -rf ./.cache
+rm -rf ./.cache/mainnet-beta-temp
 echo "[INFO] Uploading all resources"
 ts-node ~/metaplex-foundation/metaplex/js/packages/cli/src/candy-machine-cli.ts upload ./nfts-sources --env mainnet-beta --keypair ~/.config/solana/candyfactory-mainnet.json > ./logs/main/upload-log.txt
 echo "[INFO] Creating candy machine"
