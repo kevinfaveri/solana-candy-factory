@@ -43,3 +43,5 @@ Finally, have the content of it be something like this, properly replacing the `
 }
 
 ```
+
+Aaaand... it's done! You are good to go now, just re-rerun the upload command and it should resume from where it failed.
