@@ -8,6 +8,7 @@ import {
 import { Metadata } from '../libs/metaplex/index.esm';
 import axios from "axios";
 import { sendTransactions } from "./utility";
+import { fetchHashTable } from "../hooks/use-hash-table";
 
 export const CANDY_MACHINE_PROGRAM = new anchor.web3.PublicKey(
   "cndyAnrLdpjq1Ssp1z8xxDsB8dxe7u4HL5Nxi2K5WXZ"
@@ -235,6 +236,7 @@ const getTokenWallet = async (
 };
 
 export async function getNftsForOwner(connection: anchor.web3.Connection, ownerAddress: anchor.web3.PublicKey) {
+  const allMintsCandyMachine = await fetchHashTable(process.env.NEXT_PUBLIC_CANDY_MACHINE_ID!)
   const allTokens = []
   const tokenAccounts = await connection.getParsedTokenAccountsByOwner(ownerAddress, {
     programId: TOKEN_PROGRAM_ID
@@ -244,7 +246,7 @@ export async function getNftsForOwner(connection: anchor.web3.Connection, ownerA
     const tokenAccount = tokenAccounts.value[index];
     const tokenAmount = tokenAccount.account.data.parsed.info.tokenAmount;
 
-    if (tokenAmount.amount == "1" && tokenAmount.decimals == "0") {
+    if (tokenAmount.amount == "1" && tokenAmount.decimals == "0" && allMintsCandyMachine.includes(tokenAccount.account.data.parsed.info.mint)) {
 
       let [pda] = await anchor.web3.PublicKey.findProgramAddress([
         Buffer.from("metadata"),
@@ -254,7 +256,6 @@ export async function getNftsForOwner(connection: anchor.web3.Connection, ownerA
       const accountInfo = await connection.getParsedAccountInfo(pda);
 
       const metadata: any = new Metadata(ownerAddress.toString(), accountInfo.value);
-
       const { data } = await axios.get(metadata.data.data.uri)
       allTokens.push(data)
     }

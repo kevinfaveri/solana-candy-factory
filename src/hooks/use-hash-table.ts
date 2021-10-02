@@ -11,7 +11,7 @@ export const MAX_URI_LENGTH = 200;
 export const MAX_SYMBOL_LENGTH = 10;
 export const MAX_CREATOR_LEN = 32 + 1 + 1;
 
-async function fetchHashTable(hash: string, metadataEnabled: boolean): Promise<any[]> {
+export async function fetchHashTable(hash: string, metadataEnabled?: boolean): Promise<any[]> {
   const metadataProgram = new MetadataProgram()
   const metadataAccounts = await metadataProgram.getProgramAccounts(
     connection,
