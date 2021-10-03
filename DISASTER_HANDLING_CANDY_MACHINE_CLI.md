@@ -1,4 +1,4 @@
-First of all, it is blockchain: don't despair, will data is public.
+First of all, it is blockchain: don't despair, all data is public.
 
 # Common problems
 
