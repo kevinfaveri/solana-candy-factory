@@ -24,7 +24,7 @@ You will see in this page two instructions details, `Create Account` and `Instru
 Grab the value for first two values (`NewAccount`, and `Source`) and store them somewhere. 
 
 
-Now, on your project where you are deploying your candy machine and inside the `cache` folder, create a file named `mainnet-beta-temp` (without any extension). 
+Now, on your project where you are deploying your candy machine and inside the `.cache` folder, create a file named `mainnet-beta-temp` (without any extension). 
 
 Finally, have the content of it be something like this, properly replacing the `uuid`, `config` and `authority` keys but the values you grabbed above:
 
