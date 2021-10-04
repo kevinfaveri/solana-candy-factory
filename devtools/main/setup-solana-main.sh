@@ -1,5 +1,5 @@
 echo "[INFO] Setting Solana to use mainnet network"
-solana config set --url https://api.mainnet-beta.solana.com
+solana config set --url https://solana-api.projectserum.com
 echo "[INFO] Importing wallet"
 echo "Type your wallet PK so the Solana CLI can connect to it"
 read answer
