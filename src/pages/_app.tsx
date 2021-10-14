@@ -1,6 +1,7 @@
 import '../styles/globals.css'
 import { useMemo } from "react";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 
 let WALLETS: any = {
   getPhantomWallet: () => ({ name: 'Phantom' }),
@@ -40,15 +41,26 @@ const App = ({ Component, pageProps }: any) => {
   );
 
   return (
-    <ConnectionProvider endpoint={endpoint}>
-      <WalletProvider wallets={wallets} autoConnect>
-        <WalletModalProvider>
-          <WalletBalanceProvider>
-            <Component  {...pageProps} />
-          </WalletBalanceProvider>
-        </WalletModalProvider>
-      </WalletProvider>
-    </ConnectionProvider>
+    <GoogleReCaptchaProvider
+      reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_KEY}
+      scriptProps={{
+        async: false,
+        defer: false,
+        appendTo: 'head',
+        nonce: undefined
+      }}
+    >
+      <ConnectionProvider endpoint={endpoint}>
+        <WalletProvider wallets={wallets} autoConnect>
+          <WalletModalProvider>
+            <WalletBalanceProvider>
+              <Component  {...pageProps} />
+            </WalletBalanceProvider>
+          </WalletModalProvider>
+        </WalletProvider>
+      </ConnectionProvider>
+    </GoogleReCaptchaProvider>
+
   );
 };
 

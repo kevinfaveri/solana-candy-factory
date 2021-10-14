@@ -9,10 +9,11 @@ import Footer from '../components/footer';
 import useWalletBalance from '../hooks/use-wallet-balance';
 import { shortenAddress } from '../utils/candy-machine';
 import Countdown from 'react-countdown';
+import { RecaptchaButton } from '../components/recaptcha-button';
 
 const Home = () => {
   const [balance] = useWalletBalance()
-  const [isActive, setIsActive] = useState(false); // true when countdown completes
+  const [isActive, setIsActive] = useState(false);
   const wallet = useWallet();
 
   const { isSoldOut, mintStartDate, isMinting, onMint, onMintMultiple, nftsData } = useCandyMachine()
@@ -58,8 +59,8 @@ const Home = () => {
 
         <div className="flex flex-col justify-start items-start">
           {wallet.connected &&
-            <button type="button"
-              className="text-black font-bold text-lg cursor-pointer"
+            <RecaptchaButton
+              actionName="mint"
               disabled={isSoldOut || isMinting || !isActive}
               onClick={onMint}
             >
@@ -74,12 +75,12 @@ const Home = () => {
                   renderer={renderCounter}
                 />
               }
-            </button>
+            </RecaptchaButton>
           }
 
           {wallet.connected &&
-            <button type="button"
-              className="text-black font-bold text-lg cursor-pointer"
+            <RecaptchaButton
+              actionName="mint5"
               disabled={isSoldOut || isMinting || !isActive}
               onClick={() => onMintMultiple(5)}
             >
@@ -94,7 +95,7 @@ const Home = () => {
                   renderer={renderCounter}
                 />
               }
-            </button>
+            </RecaptchaButton>
           }
         </div>
         <Footer />

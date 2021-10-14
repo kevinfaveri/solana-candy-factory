@@ -30,7 +30,7 @@ fs.readdir('./logs/dev/', (err, files) => {
 
     if (fileDir.includes('new-wallet-log.txt')) {
       const fileContent = fs.readFileSync(fileDir);
-      NEXT_PUBLIC_TREASURY_ADDRESS = fileContent.toString().split('\n')[4].split(' ')[1].trim();
+      NEXT_PUBLIC_TREASURY_ADDRESS = fileContent;
     }
   });
 

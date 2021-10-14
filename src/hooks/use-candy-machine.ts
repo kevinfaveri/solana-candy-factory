@@ -55,7 +55,6 @@ export default function useCandyMachine() {
         signAllTransactions: wallet.signAllTransactions,
         signTransaction: wallet.signTransaction,
       } as anchor.Wallet;
-
       const { candyMachine, goLiveDate, itemsRemaining } =
         await getCandyMachineState(
           anchorWallet,
@@ -93,6 +92,18 @@ export default function useCandyMachine() {
   const onMint = async () => {
     try {
       setIsMinting(true);
+      const anchorWallet = {
+        publicKey: wallet.publicKey,
+        signAllTransactions: wallet.signAllTransactions,
+        signTransaction: wallet.signTransaction,
+      } as anchor.Wallet;
+      const { candyMachine } =
+        await getCandyMachineState(
+          anchorWallet,
+          candyMachineId,
+          connection
+        );
+
       if (wallet.connected && candyMachine?.program && wallet.publicKey) {
         const mintTxId = await mintOneToken(
           candyMachine,
@@ -145,6 +156,17 @@ export default function useCandyMachine() {
   const onMintMultiple = async (quantity: number) => {
     try {
       setIsMinting(true);
+      const anchorWallet = {
+        publicKey: wallet.publicKey,
+        signAllTransactions: wallet.signAllTransactions,
+        signTransaction: wallet.signTransaction,
+      } as anchor.Wallet;
+      const { candyMachine } =
+        await getCandyMachineState(
+          anchorWallet,
+          candyMachineId,
+          connection
+        );
       if (wallet.connected && candyMachine?.program && wallet.publicKey) {
         const oldBalance = await connection.getBalance(wallet?.publicKey) / LAMPORTS_PER_SOL;
         const futureBalance = oldBalance - (MINT_PRICE_SOL * quantity)

@@ -15,6 +15,7 @@ It builds on top of the the work started at https://github.com/exiled-apes/candy
 - A tool for getting the mint hashes
 - A tool for getting the list of holders
 - Multiple mint in the same prompt
+- ReCaptcha support
 
 Techwise, it builds on top of NextJS and TailwindCSS for the frontend (as well as Solana Labs toolchain and Serum Anchor libs for interacting with the Solana network); and Metaplex and Solana clis for deployment on the Solana network.
 
@@ -28,6 +29,12 @@ Techwise, it builds on top of NextJS and TailwindCSS for the frontend (as well a
 
 * Follow the instructions [here](https://hackmd.io/@levicook/HJcDneEWF) to install the Metaplex Command Line Utility.
   * Installing the Command Line Package is currently an advanced task that will be simplified eventually.
+
+## Advanced Features
+
+### ReCaptcha
+
+For adding support for recaptcha just adds a NEXT_PUBLIC_RECAPTCHA_KEY (client key) and RECAPTCHA_SECRET (server secret key) keys to your `.env` file in which the value will be your recaptcha client side key. You can generate them using your Google account: https://www.google.com/recaptcha/about/
 
 ## Devnnet
 
