@@ -26,7 +26,7 @@ const HolderList: React.FC = () => {
       <div className="flex flex-col items-center space-y-10">
         <div className="flex flex-col justify-center items-center flex-1 space-y-10 mt-20">
           <input
-            className="text-lg text-purple-400 font-bold uppercase 
+            className="text-lg text-black font-bold uppercase 
           w-96 text-center rounded-md shadow-md"
             onChange={(e) => setCandyMachineId(e.target.value as any)}
             onKeyDown={(e) => {

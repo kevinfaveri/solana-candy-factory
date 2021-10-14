@@ -27,7 +27,7 @@ const HashTable: React.FC = () => {
       <div className="flex flex-col items-center space-y-10">
         <div className="flex flex-col justify-center items-center flex-1 space-y-10 mt-20">
           <input
-            className="text-lg text-purple-400 font-bold uppercase 
+            className="text-lg text-black font-bold uppercase 
           w-96 text-center rounded-md shadow-md"
             onChange={(e) => setCandyMachineId(e.target.value as any)}
             onKeyDown={(e) => {
@@ -36,7 +36,7 @@ const HashTable: React.FC = () => {
               }
             }}
             placeholder="TYPE YOUR CANDY MACHINE ID" />
-          <div className="text-lg text-purple-400 font-bold space-x-3">
+          <div className="text-lg text-black font-bold space-x-3">
             <span>GET METADATA</span>
             <input type="checkbox" onChange={(e) => setMetadataEnabled(e.target.checked)} />
           </div>

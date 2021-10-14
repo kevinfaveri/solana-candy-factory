@@ -36,30 +36,30 @@ const Home = () => {
           width={200}
           alt="Candy Image" />
 
-        <span className="text-white font-bold text-2xl cursor-default">
+        <span className="text-gray-800 font-bold text-2xl cursor-default">
           THIS IS THE BEST CANDY MACHINE EVER
         </span>
 
         {!wallet.connected && <span
-          className="text-white font-bold text-2xl cursor-default">
+          className="text-gray-800 font-bold text-2xl cursor-default">
           NOT CONNECTED...
         </span>}
 
         {wallet.connected &&
-          <p className="text-white font-bold text-lg cursor-default">Address: {shortenAddress(wallet.publicKey?.toBase58() || "")}</p>
+          <p className="text-gray-800 font-bold text-lg cursor-default">Address: {shortenAddress(wallet.publicKey?.toBase58() || "")}</p>
         }
 
         {wallet.connected &&
           <>
-            <p className="text-white font-bold text-lg cursor-default">Balance: {(balance || 0).toLocaleString()} SOL</p>
-            <p className="text-white font-bold text-lg cursor-default">Available/Minted/Total: {nftsData.itemsRemaining}/{nftsData.itemsRedeemed}/{nftsData.itemsAvailable}</p>
+            <p className="text-gray-800 font-bold text-lg cursor-default">Balance: {(balance || 0).toLocaleString()} SOL</p>
+            <p className="text-gray-800 font-bold text-lg cursor-default">Available/Minted/Total: {nftsData.itemsRemaining}/{nftsData.itemsRedeemed}/{nftsData.itemsAvailable}</p>
           </>
         }
 
         <div className="flex flex-col justify-start items-start">
           {wallet.connected &&
             <button type="button"
-              className="text-purple-400 font-bold text-lg cursor-pointer"
+              className="text-black font-bold text-lg cursor-pointer"
               disabled={isSoldOut || isMinting || !isActive}
               onClick={onMint}
             >
@@ -79,7 +79,7 @@ const Home = () => {
 
           {wallet.connected &&
             <button type="button"
-              className="text-purple-400 font-bold text-lg cursor-pointer"
+              className="text-black font-bold text-lg cursor-pointer"
               disabled={isSoldOut || isMinting || !isActive}
               onClick={() => onMintMultiple(5)}
             >
@@ -105,7 +105,7 @@ const Home = () => {
 
 const renderCounter = ({ days, hours, minutes, seconds }: any) => {
   return (
-    <span className="text-white font-bold text-2xl cursor-default">
+    <span className="text-gray-800 font-bold text-2xl cursor-default">
       Live in {days} days, {hours} hours, {minutes} minutes, {seconds} seconds
     </span>
   );
