@@ -58,12 +58,16 @@ After the deployment is over, it will generate all envs that your frontend dApp 
 The best way to support me is by following me on [https://twitter.com/kevinfaveri_](https://twitter.com/kevinfaveri_) and [https://twitter.com/aiphotos_](https://twitter.com/aiphotos_) (which is the art project that inspired this repository) :)
 
 ## Others Tools
+
 If you want multisig wallets, you may study https://github.com/GokiProtocol/goki or the https://github.com/project-serum/multisig.
 
 Also, a ton of other useful tools/repos:
 https://github.com/HashLips/hashlips_art_engine
+
 https://github.com/exiled-apes/candy-machine-mint
+
 https://github.com/InnerMindDAO/MintUI (GUI for the Candy Machine)
+
 https://github.com/theskeletoncrew/treat-toolbox (WebApp for creating collections + Candy Machine without the candy machine cli overhead)
 
 ## Hire
