@@ -70,6 +70,8 @@ https://github.com/InnerMindDAO/MintUI (GUI for the Candy Machine)
 
 https://github.com/theskeletoncrew/treat-toolbox (WebApp for creating collections + Candy Machine without the candy machine cli overhead)
 
+https://github.com/maxwellfortney/next-candy-machine (More simplified version of this repo)
+
 ## Hire
 
 If you want to hire me to develop your candy machine application on the Solana or Ethereum blockchain feel free to reach me through the email kevin@faveri.dev
