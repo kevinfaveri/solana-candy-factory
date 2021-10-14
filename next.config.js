@@ -1,6 +1,10 @@
+const withTM = require('next-transpile-modules')([
+  '@solana/wallet-adapter-base',
+  '@solana/wallet-adapter-react']
+);
 
 /** @type {import('next').NextConfig} */
-module.exports = {
+module.exports = withTM({
   reactStrictMode: true,
   webpack5: true,
   webpack: (config) => {
@@ -8,4 +12,4 @@ module.exports = {
 
     return config;
   }
-}
+})

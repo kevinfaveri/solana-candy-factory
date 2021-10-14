@@ -1,3 +1,62 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+.frame {
+  background-color   : #ddc;
+  border             : solid 5vmin #eee;
+  border-bottom-color: #fff;
+  border-left-color  : #eee;
+  border-radius      : 2px;
+  border-right-color : #eee;
+  border-top-color   : #ddd;
+  box-shadow         : 0 0 5px 0 rgba(0, 0, 0, .25) inset, 0 5px 10px 5px rgba(0, 0, 0, .25);
+  box-sizing         : border-box;
+  display            : inline-block;
+  margin             : 0 30px;
+  padding            : 8vmin;
+  position           : relative;
+  text-align         : center;
+}
+
+.frame:before {
+  border-radius: 2px;
+  bottom       : -2vmin;
+  box-shadow   : 0 2px 5px 0 rgba(0, 0, 0, .25) inset;
+  content      : "";
+  left         : -2vmin;
+  position     : absolute;
+  right        : -2vmin;
+  top          : -2vmin;
+}
+
+.frame:after {
+  border-radius: 2px;
+  bottom       : -2.5vmin;
+  box-shadow   : 0 2px 5px 0 rgba(0, 0, 0, .25);
+  content      : "";
+  left         : -2.5vmin;
+  position     : absolute;
+  right        : -2.5vmin;
+  top          : -2.5vmin;
+}
+
+html,
+body,
+#__next {
+  @apply bg-gray-800;
+  height: 100%;
+  width : 100%;
+}
+
+#icon-eye {
+  width   : 250px;
+  margin  : auto;
+  padding : 20px;
+  overflow: auto;
+  color   : white;
+}

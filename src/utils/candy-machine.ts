@@ -169,7 +169,7 @@ export const getCandyMachineState = async (
     provider
   );
 
-  const program = new anchor.Program(idl, CANDY_MACHINE_PROGRAM, provider);
+  const program = new anchor.Program(idl!, CANDY_MACHINE_PROGRAM, provider);
   const candyMachine = {
     id: candyMachineId,
     connection,
@@ -237,7 +237,7 @@ const getTokenWallet = async (
 
 export async function getNftsForOwner(connection: anchor.web3.Connection, ownerAddress: anchor.web3.PublicKey) {
   const allMintsCandyMachine = await fetchHashTable(process.env.NEXT_PUBLIC_CANDY_MACHINE_ID!)
-  const allTokens = []
+  const allTokens: any = []
   const tokenAccounts = await connection.getParsedTokenAccountsByOwner(ownerAddress, {
     programId: TOKEN_PROGRAM_ID
   });
@@ -256,9 +256,16 @@ export async function getNftsForOwner(connection: anchor.web3.Connection, ownerA
       const accountInfo = await connection.getParsedAccountInfo(pda);
 
       const metadata: any = new Metadata(ownerAddress.toString(), accountInfo.value);
-      const { data } = await axios.get(metadata.data.data.uri)
-      allTokens.push(data)
+      const { data }: any = await axios.get(metadata.data.data.uri)
+      const entireData = { ...data, id: Number(data.name.replace( /^\D+/g, '').split(' - ')[0]) }
+
+      allTokens.push({ ...entireData })
     }
+    allTokens.sort(function (a: any, b: any) {
+      if (a.name < b.name) { return -1; }
+      if (a.name > b.name) { return 1; }
+      return 0;
+    })
   }
 
   return allTokens
@@ -328,6 +335,14 @@ export const mintOneToken = async (
       ),
     ],
   });
+}
+
+export const shortenAddress = (address: string, chars = 4): string => {
+  return `${address.slice(0, chars)}...${address.slice(-chars)}`;
+};
+
+const sleep = (ms: number): Promise<void> => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 export const mintMultipleToken = async (
@@ -412,12 +427,4 @@ export const mintMultipleToken = async (
     instructionsMatrix,
     signersMatrix,
   );
-}
-
-export const shortenAddress = (address: string, chars = 4): string => {
-  return `${address.slice(0, chars)}...${address.slice(-chars)}`;
-};
-
-const sleep = (ms: number): Promise<void> => {
-  return new Promise((resolve) => setTimeout(resolve, ms));
 }

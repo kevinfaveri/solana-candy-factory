@@ -3,15 +3,12 @@ import Head from 'next/head'
 import { useState } from "react";
 import { Toaster } from 'react-hot-toast';
 import { useWallet } from "@solana/wallet-adapter-react";
-
-import {
-  shortenAddress,
-} from "../utils/candy-machine";
 import useCandyMachine from '../hooks/use-candy-machine';
+import Header from '../components/header';
+import Footer from '../components/footer';
 import useWalletBalance from '../hooks/use-wallet-balance';
+import { shortenAddress } from '../utils/candy-machine';
 import Countdown from 'react-countdown';
-import { WalletDisconnectButton, WalletMultiButton } from '@solana/wallet-adapter-react-ui';
-
 
 const Home = () => {
   const [balance] = useWalletBalance()
@@ -24,74 +21,92 @@ const Home = () => {
     <main className="p-5">
       <Toaster />
       <Head>
-        <title>Solana Candy Machine</title>
-        <meta name="description" content="Solana Candy Machine is an open-source project using NextJS, 
-          Metaplex protocol which serve as an example app for a NFT candy machine app." />
+        <title>Solana Candy Factory</title>
+        <meta name="description" content="Solana blockchain candy machine app boilerplate on top of Metaplex Candy Machine. NextJS, Tailwind, Anchor, SolanaLabs.React, dev/mainnet automation scripts." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {wallet.connected &&
-        <p>Address: {shortenAddress(wallet.publicKey?.toBase58() || "")}</p>
-      }
 
-      {wallet.connected &&
-        <>
-          <p>Balance: {(balance || 0).toLocaleString()} SOL</p>
-          <p>Available/Minted/Total: {nftsData.itemsRemaining}/{nftsData.itemsRedeemed}/{nftsData.itemsAvailable}</p>
-        </>
-      }
+      <Header />
 
-      <div className="flex flex-col justify-start items-start">
+      <div className="flex flex-col justify-center items-center flex-1 space-y-3 mt-20">
+        <img
+          className="rounded-md shadow-lg"
+          src={`/candy.jpeg`}
+          height={200}
+          width={200}
+          alt="Candy Image" />
+
+        <span className="text-white font-bold text-2xl cursor-default">
+          THIS IS THE BEST CANDY MACHINE EVER
+        </span>
+
+        {!wallet.connected && <span
+          className="text-white font-bold text-2xl cursor-default">
+          NOT CONNECTED...
+        </span>}
+
         {wallet.connected &&
-          <button type="button"
-            disabled={isSoldOut || isMinting || !isActive}
-            onClick={onMint}
-          >
-            {isSoldOut ? (
-              "SOLD OUT"
-            ) : isActive ?
-              <span>MINT {isMinting && 'LOADING...'}</span> :
-              <Countdown
-                date={mintStartDate}
-                onMount={({ completed }) => completed && setIsActive(true)}
-                onComplete={() => setIsActive(true)}
-                renderer={renderCounter}
-              />
-            }
-          </button>
+          <p className="text-white font-bold text-lg cursor-default">Address: {shortenAddress(wallet.publicKey?.toBase58() || "")}</p>
         }
 
         {wallet.connected &&
-          <button type="button"
-            disabled={isSoldOut || isMinting || !isActive}
-            onClick={() => onMintMultiple(5)}
-          >
-            {isSoldOut ? (
-              "SOLD OUT"
-            ) : isActive ?
-              <span>MINT 5 {isMinting && 'LOADING...'}</span> :
-              <Countdown
-                date={mintStartDate}
-                onMount={({ completed }) => completed && setIsActive(true)}
-                onComplete={() => setIsActive(true)}
-                renderer={renderCounter}
-              />
-            }
-          </button>
+          <>
+            <p className="text-white font-bold text-lg cursor-default">Balance: {(balance || 0).toLocaleString()} SOL</p>
+            <p className="text-white font-bold text-lg cursor-default">Available/Minted/Total: {nftsData.itemsRemaining}/{nftsData.itemsRedeemed}/{nftsData.itemsAvailable}</p>
+          </>
         }
-      </div>
 
-      <div className="flex float-right space-x-5">
-        <WalletMultiButton />
-        <WalletDisconnectButton />
+        <div className="flex flex-col justify-start items-start">
+          {wallet.connected &&
+            <button type="button"
+              className="text-purple-400 font-bold text-lg cursor-pointer"
+              disabled={isSoldOut || isMinting || !isActive}
+              onClick={onMint}
+            >
+              {isSoldOut ? (
+                "SOLD OUT"
+              ) : isActive ?
+                <span>MINT {isMinting && 'LOADING...'}</span> :
+                <Countdown
+                  date={mintStartDate}
+                  onMount={({ completed }) => completed && setIsActive(true)}
+                  onComplete={() => setIsActive(true)}
+                  renderer={renderCounter}
+                />
+              }
+            </button>
+          }
+
+          {wallet.connected &&
+            <button type="button"
+              className="text-purple-400 font-bold text-lg cursor-pointer"
+              disabled={isSoldOut || isMinting || !isActive}
+              onClick={() => onMintMultiple(5)}
+            >
+              {isSoldOut ? (
+                "SOLD OUT"
+              ) : isActive ?
+                <span>MINT 5 {isMinting && 'LOADING...'}</span> :
+                <Countdown
+                  date={mintStartDate}
+                  onMount={({ completed }) => completed && setIsActive(true)}
+                  onComplete={() => setIsActive(true)}
+                  renderer={renderCounter}
+                />
+              }
+            </button>
+          }
+        </div>
+        <Footer />
       </div>
     </main>
   );
 };
 
-const renderCounter = ({ days, hours, minutes, seconds, completed }: any) => {
+const renderCounter = ({ days, hours, minutes, seconds }: any) => {
   return (
-    <span>
-      {hours} hours, {minutes} minutes, {seconds} seconds
+    <span className="text-white font-bold text-2xl cursor-default">
+      Live in {days} days, {hours} hours, {minutes} minutes, {seconds} seconds
     </span>
   );
 };

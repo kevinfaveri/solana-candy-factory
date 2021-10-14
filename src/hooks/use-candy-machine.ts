@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import * as anchor from "@project-serum/anchor";
-import { awaitTransactionSignatureConfirmation, CandyMachine, getCandyMachineState, mintMultipleToken, mintOneToken } from "../utils/candy-machine";
+import { awaitTransactionSignatureConfirmation, CandyMachine, getCandyMachineState, mintOneToken, mintMultipleToken } from "../utils/candy-machine";
 import { useWallet } from "@solana/wallet-adapter-react";
 import toast from 'react-hot-toast';
 import useWalletBalance from "./use-wallet-balance";
@@ -110,7 +110,7 @@ export default function useCandyMachine() {
         );
 
         if (!status?.err) {
-          toast.success("Congratulations! Mint succeeded! Check on your wallet :)")
+          toast.success("Congratulations! Mint succeeded! Check the 'My Arts' page :)")
         } else {
           toast.error("Mint failed! Please try again!")
         }
