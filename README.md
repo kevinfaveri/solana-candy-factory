@@ -45,8 +45,7 @@ After your Devnnet candy machine has been created feel free to run:
 
 ## Mainnet
 
-- Don't forget to use the wallet you want to earn the mint value for both metaplex uploading (`yarn deploy-mainnet`) and in the NFT's creators.address[0] (NFT-Manager properties editor of a specific NFT) for earning the royaties.
-- You still need to run `yarn generate-nfts-sources` if you have not created the source files yet
+- Don't forget to use the wallet you want to earn the mint value for both metaplex uploading (`yarn deploy-mainnet`) and in the NFT's creators.address[0] for earning the royaties.
 - You should have all your NFTs ready before deploying. Incremental deploying of NFTs is not supported right now. Feel free to add a PR tho if you find a solution for this
 
 For deploying your collection on the mainnet just run `yarn deploy-mainnet` and answer the questions as prompted. It will store your wallet key in our path: `~/.config/solana/candyfactory-mainnet.json` (if you want to edit that just tweak setup-solana-mainnet.sh). It is the same process as used for the development environment but asking for importing a Wallet PK (that should have enough SOLs and will be the one that will receive the mint value). 
