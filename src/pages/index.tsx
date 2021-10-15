@@ -43,7 +43,7 @@ const Home = () => {
 
         {!wallet.connected && <span
           className="text-gray-800 font-bold text-2xl cursor-default">
-          NOT CONNECTED...
+          NOT CONNECTED, PLEASE CLICK CONNECT WALLET...
         </span>}
 
         {wallet.connected &&
