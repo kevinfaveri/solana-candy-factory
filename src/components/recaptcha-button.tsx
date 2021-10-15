@@ -24,7 +24,10 @@ export const RecaptchaButton = ({
 
     const token = await executeRecaptcha(actionName);
     const { data }: any = await axios.post(`/api/validate-captcha`, { token });
-    if (data.success) await onClick()
+    if (data.success) {
+      setValidating(false)
+      await onClick()
+    }
     else toast.error("You has been flagged as a bot!")
 
     setValidating(false)
