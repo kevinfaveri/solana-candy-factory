@@ -34,7 +34,7 @@ const MyNfts = () => {
           {nfts.map((nft: any) => <div key={nft.name} className="flex pt-10 flex-col items-center 
             justify-center text-gray-800 font-bold uppercase space-y-5">
             <div className="frame flex-grow-0" style={{ padding: 5 }}>
-              <img src={nft.image} alt="AI Classic" />
+              <img src={nft.image} alt="NFT" />
             </div>
             <div className="flex flex-col text-xl space-x-3 items-center">
 
@@ -43,10 +43,6 @@ const MyNfts = () => {
                 <span>{nft.name}</span>
                 <FontAwesomeIcon icon={faExternalLinkAlt} className="w-4" />
               </a>
-              <span
-                className="flex text-black space-x-2 text-sm">
-                Inspired by {nft.inspired_by}
-              </span>
             </div>
           </div>)}
         </div>
