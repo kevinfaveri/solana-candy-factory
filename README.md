@@ -34,7 +34,9 @@ Techwise, it builds on top of NextJS and TailwindCSS for the frontend (as well a
 
 ### ReCaptcha
 
-For adding support for recaptcha just adds a NEXT_PUBLIC_RECAPTCHA_KEY (client key) and RECAPTCHA_SECRET (server secret key) keys to your `.env` file in which the value will be your recaptcha client side key. You can generate them using your Google account: https://www.google.com/recaptcha/about/
+For adding support for recaptcha just add the NEXT_PUBLIC_RECAPTCHA_KEY (client key) and RECAPTCHA_SECRET (server secret key) keys to your `.env` file in which the value will be your recaptcha client side key. You can generate them using your Google account: https://www.google.com/recaptcha/about/
+
+If you do not want to use ReCaptcha, then just use a plain button and not the ReCaptcha button component.
 
 ## Devnnet
 
