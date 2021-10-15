@@ -2,7 +2,7 @@ import * as anchor from "@project-serum/anchor";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-import { MetadataProgram, Metadata } from '../libs/metaplex/index.esm';
+import { MetadataProgram, Metadata } from '@metaplex/js';
 
 const rpcHost = process.env.NEXT_PUBLIC_SOLANA_RPC_HOST!;
 const connection = new anchor.web3.Connection(rpcHost);
@@ -12,8 +12,7 @@ export const MAX_SYMBOL_LENGTH = 10;
 export const MAX_CREATOR_LEN = 32 + 1 + 1;
 
 export async function fetchHolderList(hash: string): Promise<Set<String>> {
-  const metadataProgram = new MetadataProgram()
-  const metadataAccounts = await metadataProgram.getProgramAccounts(
+  const metadataAccounts = await MetadataProgram.getProgramAccounts(
     connection,
     {
       filters: [
@@ -45,9 +44,8 @@ export async function fetchHolderList(hash: string): Promise<Set<String>> {
 
   for (let index = 0; index < metadataAccounts.length; index++) {
     const account = metadataAccounts[index];
-    
     const accountInfo: any = await connection.getParsedAccountInfo(account.pubkey);
-    const metadata: any = new Metadata(hash.toString(), accountInfo.value);
+    const metadata = new Metadata(hash.toString(), accountInfo.value);
     const allTokenHolders: any = await connection.getTokenLargestAccounts(new anchor.web3.PublicKey(metadata.data.mint));
     const onlyHolders = allTokenHolders.value.filter((tokenHolder: any) => tokenHolder.uiAmount)
     const largestTokenHolder = onlyHolders[0]

@@ -25,6 +25,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/react-fontawesome": "^0.1.15",
     "@headlessui/react": "^1.4.1",
+    "@metaplex/js": "^1.1.1",
     "@project-serum/anchor": "0.17.1-beta.1",
     "@solana/spl-token": "^0.1.8",
     "@solana/wallet-adapter-base": "^0.6.0",

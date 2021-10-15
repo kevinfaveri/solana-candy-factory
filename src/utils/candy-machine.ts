@@ -5,7 +5,7 @@ import {
   TOKEN_PROGRAM_ID,
   Token,
 } from "@solana/spl-token";
-import { Metadata } from '../libs/metaplex/index.esm';
+import { Metadata } from '@metaplex/js';
 import axios from "axios";
 import { sendTransactions } from "./utility";
 import { fetchHashTable } from "../hooks/use-hash-table";
@@ -253,7 +253,7 @@ export async function getNftsForOwner(connection: anchor.web3.Connection, ownerA
         TOKEN_METADATA_PROGRAM_ID.toBuffer(),
         (new anchor.web3.PublicKey(tokenAccount.account.data.parsed.info.mint)).toBuffer(),
       ], TOKEN_METADATA_PROGRAM_ID);
-      const accountInfo = await connection.getParsedAccountInfo(pda);
+      const accountInfo: any = await connection.getParsedAccountInfo(pda);
 
       const metadata: any = new Metadata(ownerAddress.toString(), accountInfo.value);
       const { data }: any = await axios.get(metadata.data.data.uri)
