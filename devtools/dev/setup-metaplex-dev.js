@@ -33,6 +33,7 @@ async function setupMetaplexDev() {
   const fileContent = file.toString()
   const splittedContent = fileContent.split('\n')
   const mintPrice = await getMintPrice()
+  fs.writeFileSync(`${__dirname}/../../logs/dev/mint-price.txt`, String(mintPrice))
   splittedContent[5] = `ts-node ~/metaplex-foundation/metaplex/js/packages/cli/src/candy-machine-cli.ts create_candy_machine --env devnet --keypair ~/.config/solana/candyfactory-devnet.json --price ${mintPrice || 1} > ./logs/dev/candy-machine-log.txt`
 
   const startDate = await getStartDate()
