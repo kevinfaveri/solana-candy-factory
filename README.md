@@ -1,5 +1,9 @@
 # NFT Candy Factory
 
+##### Read this if you are coming from the Quicknode guide
+
+Currently, this repo has been reworked to represent its new goals. However, we still have some major guides in the ecosystem using the old version as reference. So, I've created a new branch from before the rework if you want to use: https://github.com/kevinfaveri/solana-candy-factory/tree/old_repo
+
 ##### I'm brainstorming a few ideas at [IDEAS](./IDEAS.MD) and [PROGRAM IDEAS](./PROGRAM_IDEAS.MD) if you want to collaborate.
 
 NOTE: This repo will prob only work on unix-based environments.
