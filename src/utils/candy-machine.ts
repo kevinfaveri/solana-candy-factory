@@ -1,17 +1,15 @@
 import * as anchor from "@project-serum/anchor";
 
-import {
-  MintLayout,
-  TOKEN_PROGRAM_ID,
-  Token,
-} from "@solana/spl-token";
-import { Metadata } from '@metaplex/js';
+import {MintLayout, Token, TOKEN_PROGRAM_ID,} from "@solana/spl-token";
+import {Metadata} from '@metaplex/js';
 import axios from "axios";
-import { sendTransactions } from "./utility";
-import { fetchHashTable } from "../hooks/use-hash-table";
+import {sendTransactions} from "./utility";
+import {fetchHashTable} from "../hooks/use-hash-table";
+import {findGatewayToken} from "@identity.com/solana-gateway-ts";
 
 export const CANDY_MACHINE_PROGRAM = new anchor.web3.PublicKey(
-  "cndyAnrLdpjq1Ssp1z8xxDsB8dxe7u4HL5Nxi2K5WXZ"
+  // "cndyAnrLdpjq1Ssp1z8xxDsB8dxe7u4HL5Nxi2K5WXZ"
+  "gcmJfhh9k7hiEbKYb4ehHEQJGrdtCrmvxw1bgiB56Vb"
 );
 
 const SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID = new anchor.web3.PublicKey(
@@ -34,6 +32,7 @@ interface CandyMachineState {
   itemsRedeemed: number;
   itemsRemaining: number;
   goLiveDate: Date,
+  gatekeeperNetwork?: anchor.web3.PublicKey,
 }
 
 export const awaitTransactionSignatureConfirmation = async (
@@ -168,7 +167,7 @@ export const getCandyMachineState = async (
     CANDY_MACHINE_PROGRAM,
     provider
   );
-
+  
   const program = new anchor.Program(idl!, CANDY_MACHINE_PROGRAM, provider);
   const candyMachine = {
     id: candyMachineId,
@@ -176,6 +175,7 @@ export const getCandyMachineState = async (
     program,
   }
   const state: any = await program.account.candyMachine.fetch(candyMachineId);
+  
   const itemsAvailable = state.data.itemsAvailable.toNumber();
   const itemsRedeemed = state.itemsRedeemed.toNumber();
   const itemsRemaining = itemsAvailable - itemsRedeemed;
@@ -183,12 +183,15 @@ export const getCandyMachineState = async (
   let goLiveDate = state.data.goLiveDate.toNumber();
   goLiveDate = new Date(goLiveDate * 1000);
 
+  const gatekeeperNetwork = state.data.gatekeeperNetwork;
+  
   return {
     candyMachine,
     itemsAvailable,
     itemsRedeemed,
     itemsRemaining,
     goLiveDate,
+    gatekeeperNetwork
   };
 }
 
@@ -272,11 +275,23 @@ export async function getNftsForOwner(connection: anchor.web3.Connection, ownerA
   return allTokens
 }
 
+const gatewayTokenToRemainingAccounts = (gatewayToken: anchor.web3.PublicKey | undefined) => (gatewayToken ? [{
+  pubkey: gatewayToken,
+  isWritable: false,
+  isSigner: false,
+}] : [])
+
+async function getRemainingAccounts(candyMachine: CandyMachine, payer: anchor.web3.PublicKey, gatekeeperNetwork: anchor.web3.PublicKey | undefined) {
+  const gatewayToken = gatekeeperNetwork ? await findGatewayToken(candyMachine.connection, payer, gatekeeperNetwork) : undefined;
+  return gatewayTokenToRemainingAccounts(gatewayToken?.publicKey);
+}
+
 export const mintOneToken = async (
   candyMachine: CandyMachine,
   config: anchor.web3.PublicKey,
   payer: anchor.web3.PublicKey,
   treasury: anchor.web3.PublicKey,
+  gatekeeperNetwork?: anchor.web3.PublicKey,
 ): Promise<string> => {
   const mint = anchor.web3.Keypair.generate();
   const token = await getTokenWallet(payer, mint.publicKey);
@@ -286,6 +301,7 @@ export const mintOneToken = async (
   const rent = await connection.getMinimumBalanceForRentExemption(
     MintLayout.span
   );
+  const remainingAccounts = await getRemainingAccounts(candyMachine, payer, gatekeeperNetwork);
 
   return await program.rpc.mintNft({
     accounts: {
@@ -304,6 +320,7 @@ export const mintOneToken = async (
       rent: anchor.web3.SYSVAR_RENT_PUBKEY,
       clock: anchor.web3.SYSVAR_CLOCK_PUBKEY,
     },
+    remainingAccounts,
     signers: [mint],
     instructions: [
       anchor.web3.SystemProgram.createAccount({
@@ -351,10 +368,12 @@ export const mintMultipleToken = async (
   config: anchor.web3.PublicKey,
   payer: anchor.web3.PublicKey,
   treasury: anchor.web3.PublicKey,
+  gatekeeperNetwork: anchor.web3.PublicKey | undefined,
   quantity: number = 2
 ) => {
   const signersMatrix = []
   const instructionsMatrix = []
+  const remainingAccounts = await getRemainingAccounts(candyMachine, payer, gatekeeperNetwork);
 
   for (let index = 0; index < quantity; index++) {
     const mint = anchor.web3.Keypair.generate();
@@ -413,7 +432,8 @@ export const mintMultipleToken = async (
           systemProgram: anchor.web3.SystemProgram.programId,
           rent: anchor.web3.SYSVAR_RENT_PUBKEY,
           clock: anchor.web3.SYSVAR_CLOCK_PUBKEY,
-        }
+        },
+        remainingAccounts,
       }),
     );
     const signers: anchor.web3.Keypair[] = [mint];

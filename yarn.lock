@@ -282,6 +282,15 @@
   resolved "https://registry.npmjs.org/@humanwhocodes/object-schema/-/object-schema-1.2.0.tgz"
   integrity sha512-wdppn25U8z/2yiaT6YGquE6X8sSv7hNMWSXYSSU1jGv/yd6XqjXgTDJ8KP4NgjTXfJ3GbRjeeb8RTV7a/VpM+w==
 
+"@identity.com/solana-gateway-ts@^0.3.3":
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/@identity.com/solana-gateway-ts/-/solana-gateway-ts-0.3.3.tgz#bb9ab03c57d39cd10f4a1f0a214e9b230f21cb91"
+  integrity sha512-lpFQZ8WDbPecorA0iNrsGVwPkkp1F4j56r51qKHEfARNKpeeRcNnutBfDxVVIWpV6oKL9yRPsbpwpa41tQ8YcQ==
+  dependencies:
+    "@solana/web3.js" "^1.22.0"
+    bn.js "^5.2.0"
+    borsh "^0.4.0"
+
 "@json-rpc-tools/provider@^1.5.5":
   version "1.7.6"
   resolved "https://registry.npmjs.org/@json-rpc-tools/provider/-/provider-1.7.6.tgz"
