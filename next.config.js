@@ -1,10 +1,18 @@
 const withTM = require('next-transpile-modules')([
   '@solana/wallet-adapter-base',
-  '@solana/wallet-adapter-react']
+  '@solana/wallet-adapter-react',
+  '@civic/solana-gateway-react']
 );
+const withPlugins = require('next-compose-plugins');
+const withImages = require('next-images');
+
+const plugins = [
+  withTM,
+  withImages
+]
 
 /** @type {import('next').NextConfig} */
-module.exports = withTM({
+module.exports = withPlugins(plugins, {
   reactStrictMode: true,
   webpack5: true,
   webpack: (config) => {

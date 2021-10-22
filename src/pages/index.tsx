@@ -12,10 +12,13 @@ import Countdown from 'react-countdown';
 import { RecaptchaButton } from '../components/recaptcha-button';
 import {faCheckCircle, faTimesCircle} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {useGatekeeperNetwork} from "../hooks/use-gateway";
+import {IdentityButton} from "@civic/solana-gateway-react";
 
 const Home = () => {
   const [balance] = useWalletBalance()
   const [isActive, setIsActive] = useState(false);
+  const { gatekeeperNetwork } = useGatekeeperNetwork()
   const wallet = useWallet();
 
   const { isSoldOut, mintStartDate, isMinting, onMint, onMintMultiple, nftsData, walletPermissioned } = useCandyMachine()
@@ -39,9 +42,7 @@ const Home = () => {
           width={200}
           alt="Candy Image" />
 
-        <span className="text-gray-800 font-bold text-2xl cursor-default">
-          THIS IS THE BEST CANDY MACHINE EVER
-        </span>
+        { gatekeeperNetwork && <IdentityButton/>}
 
         {!wallet.connected && <span
           className="text-gray-800 font-bold text-2xl cursor-default">

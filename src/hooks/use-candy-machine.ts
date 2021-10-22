@@ -7,6 +7,7 @@ import useWalletBalance from "./use-wallet-balance";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { sleep } from "../utils/utility";
 import {findGatewayToken, GatewayToken } from "@identity.com/solana-gateway-ts";
+import {useGatekeeperNetwork} from "./use-gateway";
 
 const MINT_PRICE_SOL = Number(process.env.NEXT_MINT_PRICE_SOL)
 
@@ -39,7 +40,7 @@ export default function useCandyMachine() {
   const [isMinting, setIsMinting] = useState(false);
   const [isSoldOut, setIsSoldOut] = useState(false);
   const [mintStartDate, setMintStartDate] = useState(new Date(parseInt(process.env.NEXT_PUBLIC_CANDY_START_DATE!, 10)));
-  const [gatekeeperNetwork, setGatekeeperNetwork] = useState<anchor.web3.PublicKey | undefined>();
+  const { setGatekeeperNetwork, gatekeeperNetwork } = useGatekeeperNetwork()
   const [gatewayToken, setGatewayToken] = useState<GatewayToken | undefined>();
 
   // a wallet is allowed to mint if the candymachine is not permissioned, or if there is a gateway token present

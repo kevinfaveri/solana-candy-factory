@@ -22,6 +22,7 @@ import {
 import "@solana/wallet-adapter-react-ui/styles.css";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import { WalletBalanceProvider } from '../hooks/use-wallet-balance';
+import {GatekeeperNetworkProvider, GatewayProvider} from "../hooks/use-gateway";
 
 const network = process.env.NEXT_PUBLIC_SOLANA_NETWORK as WalletAdapterNetwork;
 
@@ -52,11 +53,15 @@ const App = ({ Component, pageProps }: any) => {
     >
       <ConnectionProvider endpoint={endpoint}>
         <WalletProvider wallets={wallets} autoConnect>
-          <WalletModalProvider>
-            <WalletBalanceProvider>
-              <Component  {...pageProps} />
-            </WalletBalanceProvider>
-          </WalletModalProvider>
+          <GatekeeperNetworkProvider>
+            <GatewayProvider>
+              <WalletModalProvider>
+                <WalletBalanceProvider>
+                  <Component  {...pageProps} />
+                </WalletBalanceProvider>
+              </WalletModalProvider>
+            </GatewayProvider>
+          </GatekeeperNetworkProvider>
         </WalletProvider>
       </ConnectionProvider>
     </GoogleReCaptchaProvider>
