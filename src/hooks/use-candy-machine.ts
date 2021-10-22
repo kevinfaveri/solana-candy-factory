@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import * as anchor from "@project-serum/anchor";
 import { awaitTransactionSignatureConfirmation, CandyMachine, getCandyMachineState, mintOneToken, mintMultipleToken } from "../utils/candy-machine";
 import { useWallet } from "@solana/wallet-adapter-react";
@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import useWalletBalance from "./use-wallet-balance";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { sleep } from "../utils/utility";
+import {findGatewayToken, GatewayToken } from "@identity.com/solana-gateway-ts";
 
 const MINT_PRICE_SOL = Number(process.env.NEXT_MINT_PRICE_SOL)
 
@@ -38,6 +39,19 @@ export default function useCandyMachine() {
   const [isMinting, setIsMinting] = useState(false);
   const [isSoldOut, setIsSoldOut] = useState(false);
   const [mintStartDate, setMintStartDate] = useState(new Date(parseInt(process.env.NEXT_PUBLIC_CANDY_START_DATE!, 10)));
+  const [gatekeeperNetwork, setGatekeeperNetwork] = useState<anchor.web3.PublicKey | undefined>();
+  const [gatewayToken, setGatewayToken] = useState<GatewayToken | undefined>();
+
+  // a wallet is allowed to mint if the candymachine is not permissioned, or if there is a gateway token present
+  const walletPermissioned = gatekeeperNetwork ? !!gatewayToken : undefined;
+  
+  useEffect(() => {
+    (async () => {
+      if (!gatekeeperNetwork || !candyMachine || !wallet || !wallet.publicKey) return;
+      const foundToken = await findGatewayToken(candyMachine.connection, wallet.publicKey, gatekeeperNetwork);
+      setGatewayToken(foundToken ? foundToken : undefined)
+    })();
+  }, [gatekeeperNetwork, setGatewayToken, candyMachine, wallet])
 
   useEffect(() => {
     (async () => {
@@ -55,7 +69,7 @@ export default function useCandyMachine() {
         signAllTransactions: wallet.signAllTransactions,
         signTransaction: wallet.signTransaction,
       } as anchor.Wallet;
-      const { candyMachine, goLiveDate, itemsRemaining } =
+      const { candyMachine, goLiveDate, itemsRemaining, gatekeeperNetwork } =
         await getCandyMachineState(
           anchorWallet,
           candyMachineId,
@@ -65,6 +79,7 @@ export default function useCandyMachine() {
       setIsSoldOut(itemsRemaining === 0);
       setMintStartDate(goLiveDate);
       setCandyMachine(candyMachine);
+      setGatekeeperNetwork(gatekeeperNetwork);
     })();
   }, [wallet, candyMachineId, connection]);
 
@@ -97,7 +112,7 @@ export default function useCandyMachine() {
         signAllTransactions: wallet.signAllTransactions,
         signTransaction: wallet.signTransaction,
       } as anchor.Wallet;
-      const { candyMachine } =
+      const { candyMachine, gatekeeperNetwork } =
         await getCandyMachineState(
           anchorWallet,
           candyMachineId,
@@ -109,7 +124,8 @@ export default function useCandyMachine() {
           candyMachine,
           config,
           wallet.publicKey,
-          treasury
+          treasury,
+          gatekeeperNetwork
         );
 
         const status = await awaitTransactionSignatureConfirmation(
@@ -161,7 +177,7 @@ export default function useCandyMachine() {
         signAllTransactions: wallet.signAllTransactions,
         signTransaction: wallet.signTransaction,
       } as anchor.Wallet;
-      const { candyMachine } =
+      const { candyMachine, gatekeeperNetwork } =
         await getCandyMachineState(
           anchorWallet,
           candyMachineId,
@@ -176,6 +192,7 @@ export default function useCandyMachine() {
           config,
           wallet.publicKey,
           treasury,
+          gatekeeperNetwork,
           quantity
         );
 
@@ -249,5 +266,5 @@ export default function useCandyMachine() {
   };
 
 
-  return { isSoldOut, mintStartDate, isMinting, nftsData, onMint, onMintMultiple }
+  return { isSoldOut, mintStartDate, isMinting, nftsData, onMint, onMintMultiple, walletPermissioned }
 }

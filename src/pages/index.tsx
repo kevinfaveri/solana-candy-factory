@@ -10,14 +10,16 @@ import useWalletBalance from '../hooks/use-wallet-balance';
 import { shortenAddress } from '../utils/candy-machine';
 import Countdown from 'react-countdown';
 import { RecaptchaButton } from '../components/recaptcha-button';
+import {faCheckCircle, faTimesCircle} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const Home = () => {
   const [balance] = useWalletBalance()
   const [isActive, setIsActive] = useState(false);
   const wallet = useWallet();
 
-  const { isSoldOut, mintStartDate, isMinting, onMint, onMintMultiple, nftsData } = useCandyMachine()
-
+  const { isSoldOut, mintStartDate, isMinting, onMint, onMintMultiple, nftsData, walletPermissioned } = useCandyMachine()
+  
   return (
     <main className="p-5">
       <Toaster />
@@ -47,7 +49,14 @@ const Home = () => {
         </span>}
 
         {wallet.connected &&
-          <p className="text-gray-800 font-bold text-lg cursor-default">Address: {shortenAddress(wallet.publicKey?.toBase58() || "")}</p>
+          <div className="inline-flex" title={walletPermissioned ? 'Wallet is permitted to mint' : 'Wallet is not permitted to mint'}>
+            { walletPermissioned !== undefined && ( 
+              walletPermissioned ? 
+              <FontAwesomeIcon icon={faCheckCircle} className="w-4" color="green" /> : 
+              <FontAwesomeIcon icon={faTimesCircle} className="w-4" color="red" />
+            )}
+            <p className="text-gray-800 font-bold text-lg cursor-default">Address: {shortenAddress(wallet.publicKey?.toBase58() || "")}</p>
+          </div>
         }
 
         {wallet.connected &&
@@ -61,7 +70,8 @@ const Home = () => {
           {wallet.connected &&
             <RecaptchaButton
               actionName="mint"
-              disabled={isSoldOut || isMinting || !isActive}
+              // checking explicitly for walletPermissioned === false as undefined means "not needed"
+              disabled={isSoldOut || isMinting || !isActive || (walletPermissioned === false)}
               onClick={onMint}
             >
               {isSoldOut ? (
@@ -81,7 +91,8 @@ const Home = () => {
           {wallet.connected &&
             <RecaptchaButton
               actionName="mint5"
-              disabled={isSoldOut || isMinting || !isActive}
+              // checking explicitly for walletPermissioned === false as undefined means "not needed"
+              disabled={isSoldOut || isMinting || !isActive || (walletPermissioned === false)}  
               onClick={() => onMintMultiple(5)}
             >
               {isSoldOut ? (
