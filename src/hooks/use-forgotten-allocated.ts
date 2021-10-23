@@ -28,8 +28,8 @@ export async function fetchForgottenAllocatedCandyMachine(hash: string): Promise
 
   for (let index = 0; index < forgottenCandyMachines.length; index++) {
     const cm = forgottenCandyMachines[index];
-    // If 529 it is a config account and not a candy machine
-    if (cm.account.data.byteLength === 529)
+    // If more than 529 it is a config account and not a candy machine
+    if (cm.account.data.byteLength > 529)
       candyMachineConfigs.push({
         "program": {
           "uuid": cm.pubkey.toString().substring(0, 6),
