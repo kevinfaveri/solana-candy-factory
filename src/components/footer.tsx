@@ -15,6 +15,12 @@ const Footer: React.FC = () => {
         <a>Holder List</a>
       </Link>
     </div>
+    <span>|</span>
+    <div className="text-blue-400 hover:text-blue-500 uppercase transition space-x-2 font-bold flex items-center">
+      <Link href="/find-candy-machine-configs">
+        <a>Get Candy Machine Configs</a>
+      </Link>
+    </div>
   </div>;
 }
 

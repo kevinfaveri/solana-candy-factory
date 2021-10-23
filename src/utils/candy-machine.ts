@@ -5,7 +5,8 @@ import {
   TOKEN_PROGRAM_ID,
   Token,
 } from "@solana/spl-token";
-import { Metadata } from '@metaplex/js';
+import { programs } from '@metaplex/js';
+const { metadata: { Metadata } } = programs
 import axios from "axios";
 import { sendTransactions } from "./utility";
 import { fetchHashTable } from "../hooks/use-hash-table";

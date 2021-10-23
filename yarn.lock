@@ -346,10 +346,10 @@
   resolved "https://registry.npmjs.org/@ledgerhq/logs/-/logs-6.2.0.tgz"
   integrity sha512-SLyFyD7ElMhgKWPYedFGCT/ilcbGPgL5hXXYHxOM79Fs5fWi0zaUpt5oGqGMsOAAFaMa9/rbun0pokzPhEFz8A==
 
-"@metaplex/js@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@metaplex/js/-/js-1.1.1.tgz#edfbdae10c0c4d09da13b5aba623676a6946cecc"
-  integrity sha512-GK7rAiSnhq7KZIfNKEN77w3xd/x62rn3KxhhlTtiKKFEXeGGahOxxVmJYGFhqtxmNgufcZoTs+qo/1QbcYKIgg==
+"@metaplex/js@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@metaplex/js/-/js-3.0.0.tgz#1163c4e4c6ca3b395f193ad2bd51cc0274083664"
+  integrity sha512-DFEFIAbiSAvByvRQVWTaGi6iAcCshFXfnxDQ0xpxX/zwEYXsRotgiFSpCIWfpbtqJMSfPyzC+pbW43sT6hY8YQ==
   dependencies:
     "@solana/spl-token" "^0.1.8"
     "@solana/web3.js" "^1.24.1"
