@@ -3,6 +3,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 import { programs } from '@metaplex/js';
+import allMarkets from "../utils/ marketplaces";
 const { metadata: { Metadata, MetadataProgram } } = programs
 
 const rpcHost = process.env.NEXT_PUBLIC_SOLANA_RPC_HOST!;
@@ -52,7 +53,8 @@ export async function fetchHolderList(hash: string): Promise<Set<String>> {
     const largestTokenHolder = onlyHolders[0]
     const tokenHolderAddress = largestTokenHolder.address
     const tokenHolderOwner: any = await connection.getParsedAccountInfo(tokenHolderAddress);
-    allHolders.add(tokenHolderOwner.value.data.parsed.info.owner)
+    if(!allMarkets.includes(tokenHolderOwner.value.data.parsed.info.owner))
+      allHolders.add(tokenHolderOwner.value.data.parsed.info.owner)
   }
 
   return allHolders
