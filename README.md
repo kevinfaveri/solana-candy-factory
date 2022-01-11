@@ -1,4 +1,8 @@
-# NFT Candy Factory
+# Hey, this repo is now completely outdated as it only implements the Candy Machine V1 (which has been desactivated by Metaplex)! Feel free to send a PR for supporting CM2 OR use the example app in the Metaplex official repo
+
+---
+
+# Solana NFT Candy Factory
 
 ##### Read this if you are coming from the Quicknode guide
 
@@ -68,25 +72,23 @@ After the deployment is over, it will generate all envs that your frontend dApp 
 
 ## Donate
 
-The best way to support me is by following me on [https://twitter.com/kevinfaveri_](https://twitter.com/kevinfaveri_) and [https://twitter.com/aiphotos_](https://twitter.com/aiphotos_) (which is the art project that inspired this repository) :)
+The best way to support me is by following me on [https://twitter.com/kevcode_sol](https://twitter.com/kevcode_sol) and [https://twitter.com/aiphotos_](https://twitter.com/aiphotos_) (which is the art project that inspired this repository) :)
 
 ## Others Tools
 
 If you want multisig wallets, you may study https://github.com/GokiProtocol/goki or the https://github.com/project-serum/multisig.
 
-Also, a ton of other useful tools/repos:
+A ton of other useful tools/repos:
 https://github.com/HashLips/hashlips_art_engine
 
 https://github.com/exiled-apes/candy-machine-mint
 
 https://github.com/InnerMindDAO/MintUI (GUI for the Candy Machine)
 
-https://github.com/theskeletoncrew/treat-toolbox (WebApp for creating collections + Candy Machine without the candy machine cli overhead)
+https://github.com/theskeletoncrew/treat-toolbox (WebApp for creating collections using a web UI)
 
-https://github.com/maxwellfortney/next-candy-machine (More simplified version of this repo)
-
-https://github.com/samuelvanderwaal/metaboss (CLI with useful tools for Metaplex)
+https://github.com/samuelvanderwaal/metaboss (CLI with useful tools for Metaplex software)
 
 ## Hire
 
-If you want to hire me to develop your candy machine application on the Solana blockchain feel free to reach to a friend of mine through the email eduardonicoleit@hotmail.com
+If you want to hire someone to develop your candy machine application on the Solana blockchain feel free to reach to a friend of mine through the email eduardonicoleit@hotmail.com
