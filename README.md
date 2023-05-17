@@ -72,7 +72,7 @@ After the deployment is over, it will generate all envs that your frontend dApp 
 
 ## Donate
 
-The best way to support me is by following me on [https://twitter.com/kevcode_sol](https://twitter.com/kevcode_sol) and [https://twitter.com/aiphotos_](https://twitter.com/aiphotos_) (which is the art project that inspired this repository) :)
+The best way to support me is by following me on [https://twitter.com/kevcode_art](https://twitter.com/kevcode_art) and [https://twitter.com/aiphotos_](https://twitter.com/aiphotos_) (which is the art project that inspired this repository) :)
 
 ## Others Tools
 
@@ -88,7 +88,3 @@ https://github.com/InnerMindDAO/MintUI (GUI for the Candy Machine)
 https://github.com/theskeletoncrew/treat-toolbox (WebApp for creating collections using a web UI)
 
 https://github.com/samuelvanderwaal/metaboss (CLI with useful tools for Metaplex software)
-
-## Hire
-
-If you want to hire someone to develop your candy machine application on the Solana blockchain feel free to reach to a friend of mine through the email eduardonicoleit@hotmail.com
